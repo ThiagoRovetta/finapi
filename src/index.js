@@ -111,4 +111,19 @@ app.get("/statement/date", verifyIfCPFAccountExists, (request, response) => {
   return response.status(200).json(statement);
 });
 
+app.put("/account", verifyIfCPFAccountExists, (request, response) => {
+  const { name } = request.body;
+  const { customer } = request;
+
+  customer.name = name;
+
+  return response.status(204).send();
+});
+
+app.get("/account", verifyIfCPFAccountExists, (request, response) => {
+  const { customer } = request;
+
+  return response.status(200).json(customer);
+})
+
 app.listen(3333);
